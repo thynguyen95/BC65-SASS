@@ -1,0 +1,47 @@
+.phoneCarousel {
+  background: url("../image/product-header-bg.jpg") no-repeat right bottom /
+    cover;
+  padding: 200px 0;
+
+  &__content {
+    h2 {
+      @include styleText(5rem, bold, $color-blue-1);
+    }
+
+    h3 {
+      @include styleText(1.5rem, 500, $color-blue-2);
+    }
+
+    p {
+      @include styleText(1rem, normal, $color-dark-1);
+      margin-top: 20px;
+    }
+  }
+}
+
+.products {
+  padding: 100px 0;
+
+  &__title {
+    text-align: center;
+    @include styleText(2rem, bold, $color-blue-2);
+    margin-bottom: 40px;
+  }
+
+  &__item {
+    margin-bottom: 30px;
+    .card {
+      border: none;
+      box-shadow: 6px 6px 12px #e2ebfc, -6px -6px 12px #fff;
+      background-color: #f5f9fe;
+      border-radius: 10px;
+      padding: 30px;
+
+      &-img-top {
+        box-shadow: 6px 6px 12px #e2ebfc, -6px -6px 12px #fff;
+        background-color: #f5f9fe;
+        border-radius: 10px;
+      }
+    }
+  }
+}

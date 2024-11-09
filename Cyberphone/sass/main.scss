@@ -1,0 +1,26 @@
+//1. Base: chứa những file chỉnh sửa mặc định của trình duyệt - reset
+// 2. Helpers: chứa những file variables, mixin, extend, function...
+// 3. Components: chứa những file phần tử nhỏ của trang (btn, title )
+// 4. Layout : chứa những thành phần lớn dùng chung cho toàn page (header, footer, sidebar, ...)
+// 5. Pages: chứa style riêng của những page khác nhau(home, contact, about,...)
+// 6. Themes: chứa những theme chủ đạo khác nhau
+// 7. Vendors: chứa file scss của những thư viện bên ngoài
+
+//-----------------------------//
+// Thứ tự import
+// 1. Helpers
+@import "./Helpers/variables";
+@import "./Helpers/mixin";
+// 2. Vendors
+// 3. Base
+@import "./Base/reset";
+// 4. Component
+@import "./Components/buttons";
+// 5. Layout
+@import "./Layout/header";
+@import "./Layout/footer";
+// 6. Pages
+@import "./Pages/home";
+// 7. Themes
+@import "./Themes/darkMode";
+@import "./Themes/greenMode";

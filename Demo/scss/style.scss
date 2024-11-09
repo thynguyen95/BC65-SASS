@@ -1,0 +1,207 @@
+// quy tắc đặt biến: đặt theo chỉ số, thuộc tính hoặc màu sắc
+// Syntax: $variable_name: value
+// khi nào cần khai báo biến:
+// + Khi giá trị đó sử dụng 2 lần trở lên
+// + những giá trị có khả năng thay đổi trong tương lai
+// + Khi đặt biến nên phân ra từng loại biến theo thuộc tính: color, fs, bg
+$fs-0: 10px;
+$fs-1: 20px;
+$fs-2: 30px;
+
+$color-red: rgba(255, 0, 0, 0.8);
+$color-black: black;
+$color-main: blue;
+$color-title: yellow;
+$color-text: black;
+
+// khai báo mixin - tương tự function của js(có tên mixin, có param truyền vào)
+// Sử dụng mixin dùng @include tenMixin()
+@mixin btn($bg, $color, $border, $border-radius, $padding) {
+  background: $bg;
+  color: $color;
+  border: 1px solid $border;
+  border-radius: $border-radius;
+  padding: $padding;
+}
+
+.btn1 {
+  background: blue;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+
+.btn2 {
+  //   background: white;
+  //   color: blue;
+  //   border: 1px solid blue;
+  //   border-radius: 10px;
+  //   padding: 10px 20px;
+
+  //   sử dụng mixin
+  @include btn(#fff, blue, blue, 10px, 10px 20px);
+}
+
+// extend: kế thừa
+.background__cover {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 500px;
+}
+
+// Biến mảng
+// $variable : (
+//   key : value ,
+//   key : value ,
+// )
+$breakpoint: (
+  "extra-large": 1200px,
+  "large": 992px,
+  "medium": 768px,
+  "small": 576px,
+);
+
+// map-has-key: cho biết trong mảng có key truyền vào hay ko, nó sẽ trả về giá trị true/false
+// nhận vào 2 tham số:
+// $map : biến mảng
+// $key : là giá trị cần tìm trong biến mảng
+@mixin responsive($screen) {
+  @if (map-has-key($map: $breakpoint, $key: $screen)) {
+    // map-get: trả về giá trị của $key trong biến mảng $map
+    $value: map-get(
+      $map: $breakpoint,
+      $key: $screen,
+    );
+    @media screen and (max-width: $value) {
+      // nội dung code truyền vào bên trong mixin
+      @content;
+    }
+  } @else {
+    @warn "`${screen}` không tồn tại";
+  }
+}
+
+.button {
+  background: red;
+}
+
+// .box .box__child p {}
+// .box {
+//     width: 800px;
+//     margin: 0 auto;
+// }
+// @media screen and (max-width: 768px) {
+//   .box {
+//     width: 100%;
+//   }
+// }
+// .box .box__child p {
+
+// }
+
+.box {
+  width: 800px;
+  margin: 0 auto;
+  background-image: url("../image/workplace.jpg");
+  @extend .background__cover;
+  height: 300px;
+  @include responsive("medium") {
+    width: 100%;
+  }
+  @include responsive("small") {
+    width: 90%;
+  }
+
+  // &: đại diện cho class cha - parent selector
+  &__child {
+    p {
+      background: black;
+      color: $color-text;
+    }
+  }
+}
+
+// for/while
+
+$number: 1;
+// from a to b : sẽ chạy vòng lặp từ a tới nhỏ hơn b
+@for $number from 1 to 13 {
+  .col-#{$number} {
+    width: 100% * $number / 12;
+  }
+}
+
+// from a through b: sẽ chạy vòng lặp từ a tới <= b
+@for $number from 1 through 12 {
+  .col-#{$number} {
+    width: 100% * $number / 12;
+  }
+}
+
+// khi sử dụng while phải tăng biến đếm cho nó
+@while $number < 13 {
+  .col-#{$number} {
+    width: calc(100% * $number / 12);
+  }
+
+  $number: $number + 1;
+}
+
+// forEach(js) - each(sass)
+$sizes: 30px, 40px, 50px;
+@each $size in $sizes {
+  .icon-#{$size} {
+    font-size: $size;
+    width: $size;
+    height: $size;
+  }
+}
+
+// placeholder selector
+// cú pháp :
+// %ten {
+//   key : value
+// }
+// sử dụng : @extend %ten
+%layout {
+  max-width: 100%;
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.container {
+  @extend %layout;
+}
+
+// function
+// @function pow($base, $array) {
+//   $result: 1;
+
+//   @for $i from 1 through $array {
+//     $result: $result * $base;
+//   }
+
+//   @return $result;
+// }
+
+@function pow2($number, $exponent) {
+  $value: 1;
+
+  @if $exponent > 0 {
+    @for $i from 1 through $exponent {
+      $value: $value * $number;
+    }
+  }
+
+  @return $value;
+}
+
+.test {
+  width: pow(4, 3) * 1px;
+  margin: pow2(4, 5) * 1px;
+}
+
+// for(var i = 0; i < $array; i++) {
+//   result = result * $base
+// }

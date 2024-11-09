@@ -1,0 +1,59 @@
+@mixin styleText($fs, $fw, $color) {
+  font-size: $fs;
+  font-weight: $fw;
+  color: $color;
+}
+
+@mixin styleBtn(
+  $bg,
+  $border,
+  $border-radius,
+  $box-shadow,
+  $fsTxt,
+  $fw,
+  $colorTxt,
+  $fsIcon,
+  $colorIcon,
+  $pd
+) {
+  background: $bg;
+  border: $border;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  font-size: $fsTxt;
+  font-weight: $fw;
+  color: $colorTxt;
+  padding: $pd;
+  transition: all 0.3s;
+
+  i {
+    font-size: $fsIcon;
+    color: $colorIcon;
+    transition: all 0.3s;
+  }
+}
+
+@mixin darkMode1 {
+  .dark {
+    @content;
+  }
+}
+
+@mixin greenMode1 {
+  .green {
+    @content;
+  }
+}
+
+@mixin themeMode($color) {
+  #{$color} {
+    @content;
+  }
+}
+
+@mixin darkMode2 {
+  // &: đại diện cho class bao ngoài include
+  .dark & {
+    @content;
+  }
+}

@@ -1,0 +1,38 @@
+.button {
+  @include styleBtn(
+    $color-white-2,
+    2px solid $color-blue-1,
+    10px,
+    0 2px 4px $color-white-4,
+    1rem,
+    500,
+    $color-blue-1,
+    1rem,
+    $color-blue-1,
+    12px 40px
+  );
+
+  &:hover {
+    background: $color-blue-1;
+    color: $color-white-1;
+
+    i {
+      color: $color-white-1;
+    }
+  }
+
+  &--blue {
+    background: linear-gradient(120deg, #60a4f4, #2a73dd);
+    color: $color-white-1;
+    border-color: transparent;
+
+    i {
+      color: $color-white-1;
+    }
+
+    &:hover {
+      background: linear-gradient(120deg, #60a4f4, #2a73dd);
+      opacity: 0.8;
+    }
+  }
+}
